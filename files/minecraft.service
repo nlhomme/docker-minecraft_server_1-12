@@ -1,0 +1,13 @@
+[Unit] 
+Description=start and stop the minecraft-server 
+
+[Service]
+WorkingDirectory=/opt/minecraft
+User=minecraft
+Group=minecraft
+Restart=on-failure
+RestartSec=20 5
+ExecStart=/usr/bin/java -Xms1536M -Xmx1536M -jar minecraft_server.1.12.jar nogui
+
+[Install]
+WantedBy=multi-user.target
