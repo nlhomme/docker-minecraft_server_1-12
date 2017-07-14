@@ -7,14 +7,16 @@
 FROM openjdk:8-jre
 
 #Check/Install rsync, just in case
-RUN apt-get install rsync
+RUN apt-get update && apt-get install rsync
 
 #Creation of the folder where the server will run
 RUN mkdir /opt/minecraft
 
+#Donwnload Minecraft Server
+RUN wget https://s3.amazonaws.com/Minecraft.Download/versions/1.12/minecraft_server.1.12.jar -P /opt/minecraft/
+
 #Copy files
 ADD files/eula.txt /opt/minecraft/eula.txt
-ADD files/minecraft_server.1.12.jar /opt/minecraft/
 ADD files/server.properties /opt/minecraft/
 ADD files/minecraft.service /etc/systemd/system/
 ADD files/rsync-minecraft /opt/minecraft/
