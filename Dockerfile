@@ -6,8 +6,8 @@
 
 FROM openjdk:8-jre
 
-#Check/Install rsync, just in case
-RUN apt-get update && apt-get install rsync
+#Install rsync
+RUN apt-get update && apt-get -y install rsync
 
 #Creation of the folder where the server will run
 RUN mkdir /opt/minecraft
