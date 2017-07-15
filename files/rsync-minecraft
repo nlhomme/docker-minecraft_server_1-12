@@ -1,8 +1,0 @@
-#!/bin/sh
-#Backup your Minecraft world and files using rsync
-
-#This script will be located at /etc/cron.hourly/ and executed every hour
-#You can use this exemple (replace with your values and remove the "#")
-#Or make your own, check https://ss64.com/bash/rsync.html 
-
-#rsync -e ssh -avr /opt/minecraft/ user@adress:/path/to/destination/folder

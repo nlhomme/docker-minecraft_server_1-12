@@ -1,7 +1,7 @@
 ##
 # NAME             : nlhomme/docker-minecraft_server_1-12
 # TO_BUILD         : docker build --rm -t nlhomme/docker-minecraft_server_1-12:latest .
-# TO_RUN           : docker run -v /mnt/minecraft:/opt/minecraft/ -p 25565:25565 nlhomme/docker-minecraft_server_1-12:latest 
+# TO_RUN           : docker run -t -v /mnt/minecraft:/opt/minecraft/ -p 25565:25565 nlhomme/docker-minecraft_server_1-12:latest 
 ##
 
 FROM openjdk:8-jre
@@ -19,17 +19,15 @@ RUN wget https://s3.amazonaws.com/Minecraft.Download/versions/1.12/minecraft_ser
 ADD files/eula.txt /opt/minecraft/eula.txt
 ADD files/server.properties /opt/minecraft/
 ADD files/minecraft.service /etc/systemd/system/
-ADD files/rsync-minecraft /opt/minecraft/
+ADD files/minecraft-cronjob /etc/cron.d/
 
-#Make the backup script executable
-RUN chmod +x /opt/minecraft/rsync-minecraft
-
-#Create the cron job to backup minecraft every hour
-RUN crontab -l > mycron && \
-    echo "0*/1 * * * sh /opt/minecraft/rsync-minecraft" >> mycron && \
-    rm mycron
+#Give execution rights on the cron job
+RUN chmod 0644 /etc/cron.d/minecraft-cronjob
 
 #Start minecraft
 RUN systemctl enable minecraft.service
+
+CMD ["/bin/bash"]
+
 
 EXPOSE 25565

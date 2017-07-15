@@ -1,0 +1,9 @@
+#!/bin/sh
+#Backup your Minecraft world and files using rsync
+
+#This script will be located at /etc/cron.d/ and executed every hour thanks to cron
+#You can use the below example (just replace with your values in the rsync command then remove the "#")
+#Or make your own, check https://ss64.com/bash/rsync.html 
+#More infos about cron: https://wiki.archlinux.org/index.php/cron
+
+#* */1 * * * rsync -e ssh -avr /opt/minecraft/ user@adress:/path/to/destination/folder
