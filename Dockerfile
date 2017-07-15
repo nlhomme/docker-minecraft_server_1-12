@@ -6,8 +6,8 @@
 
 FROM openjdk:8-jre
 
-#Install rsync and cron
-RUN apt-get update && apt-get -y install rsync cron
+#Install rsync, systemd and cron
+RUN apt-get update && apt-get -y install rsync cron systemd
 
 #Creation of the folder where the server will run
 RUN mkdir /opt/minecraft
