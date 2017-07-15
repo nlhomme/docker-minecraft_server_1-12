@@ -25,7 +25,7 @@ ADD files/minecraft-cronjob /etc/cron.d/
 RUN chmod 0644 /etc/cron.d/minecraft-cronjob
 
 #Start minecraft
-RUN systemctl enable minecraft.service
+RUN systemctl start minecraft.service
 
 CMD ["/bin/bash"]
 
