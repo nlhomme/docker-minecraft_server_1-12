@@ -1,5 +1,5 @@
-# docker-minecraft_server_1-12
+# Minecraft server for dummies
 
 # Work in progress!
 
-(Very) Easily install a minecraft server using Docker
+(Very) Easily install a minecraft server directly on your machine or using Docker
