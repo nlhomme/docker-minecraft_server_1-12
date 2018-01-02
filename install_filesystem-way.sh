@@ -21,14 +21,14 @@ chmod 0644 /etc/cron.d/minecraft-cronjob
 
 echo "Installation done!"
 
-echo "Do you want to start the minecraft server at boot?"
+echo "Do you want to start the minecraft server at boot? (y/N)"
 	read -r enable
 	if [[ "$enable" = "y" ]]
 	then
 		systemctl enable minecraft.service
 	fi
 
-echo "Do you want to start the minecraft server right now?"
+echo "Do you want to start the minecraft server right now? (y/N)"
 	read -r enable
 	if [[ "$enable" = "y" ]]
 	then
