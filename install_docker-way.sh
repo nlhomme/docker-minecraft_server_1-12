@@ -20,7 +20,7 @@ docker build --rm -t nlhomme/minecraft_server-fordummies:latest .
 #If the build has failed, exit with error code			
 #if $
 echo "Your minecraft docker inside docker is ready! To run it, type:"
-echo "docker run -t -v /mnt/minecraft:/opt/minecraft/ -p 25565:25565 nlhomme/minecraft_server-fordummies:latest"		
+echo "docker run -t -p 25565:25565 nlhomme/minecraft_server-fordummies:lastest"		
 
 exit 0
 
