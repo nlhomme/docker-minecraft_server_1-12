@@ -1,33 +1,30 @@
 ##
-# NAME             : nlhomme/docker-minecraft_server_1-12
-# TO_BUILD         : docker build --rm -t nlhomme/docker-minecraft_server_1-12:latest .
-# TO_RUN           : docker run -t -v /mnt/minecraft:/opt/minecraft/ -p 25565:25565 nlhomme/docker-minecraft_server_1-12:latest 
+# NAME             : nlhomme/minecraft_server-fordummies
+# TO_BUILD         : docker build --rm -t nlhomme/minecraft_server-fordummies:lastest .
+# TO_RUN           : docker run -t -p 25565:25565 nlhomme/minecraft_server-fordummies:lastest
 ##
 
 FROM openjdk:8-jre
 
-#Install rsync, systemd and cron
-RUN apt-get update && apt-get -y install rsync cron systemd
+#Install rsync and cron
+RUN apt-get update && apt-get -y install rsync cron
 
 #Creation of the folder where the server will run
 RUN mkdir /opt/minecraft
+WORKDIR /opt/minecraft
 
 #Donwnload Minecraft Server
-RUN wget https://s3.amazonaws.com/Minecraft.Download/versions/1.12/minecraft_server.1.12.jar -P /opt/minecraft/
+RUN wget https://s3.amazonaws.com/Minecraft.Download/versions/1.12/minecraft_server.1.12.jar
 
 #Copy files
-ADD files/eula.txt /opt/minecraft/eula.txt
-ADD files/server.properties /opt/minecraft/
-ADD files/minecraft.service /etc/systemd/system/
+ADD files/eula.txt .
+ADD files/server.properties .
 ADD files/minecraft-cronjob /etc/cron.d/
 
 #Give execution rights on the cron job
 RUN chmod 0644 /etc/cron.d/minecraft-cronjob
 
 #Start minecraft
-RUN systemctl start minecraft.service
-
-CMD ["/bin/bash"]
-
+CMD java -Xms1536M -Xmx1536M -jar /opt/minecraft/minecraft_server.1.12.jar nogui
 
 EXPOSE 25565
