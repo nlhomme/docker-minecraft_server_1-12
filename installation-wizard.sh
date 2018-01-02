@@ -37,8 +37,6 @@ then
 	if [[ "$sure" = "y" ]]
 	then
 		./install_filesystem-way.sh
-		echo "pouet"
-
 	else	
 		echo "Aborting"
 		exit 0
