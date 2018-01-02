@@ -32,7 +32,7 @@ then
 
 elif [[ "$way" = "2" ]]
 then
-	echo "You have selected the filesystem way. Are you sure?"
+	echo "You have selected the filesystem way. Are you sure? (y/N)"
 	read -r sure
 	if [[ "$sure" = "y" ]]
 	then
