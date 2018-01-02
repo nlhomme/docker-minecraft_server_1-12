@@ -39,10 +39,9 @@ then
 		./install_filesystem-way.sh
 		echo "pouet"
 
-	elif [[ "$sure" = "n" ]]
-		then	
-			echo "Aborting"
-			exit 0
+	else	
+		echo "Aborting"
+		exit 0
 	fi
 
 else
