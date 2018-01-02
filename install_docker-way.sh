@@ -15,7 +15,7 @@ else
 fi
 
 #Now let's build the container
-docker build --rm -t nlhomme/minecraft_server-fordummies:latest .
+docker build --rm -t nlhomme/minecraft_server-fordummies:lastest .
 
 #If the build has failed, exit with error code			
 #if $
