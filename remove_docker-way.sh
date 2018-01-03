@@ -17,8 +17,9 @@ read -r sure
 if [[ "$sure" = "y" ]]
 then
 	##If the container is already running, stop it automatically
+	docker ps -q --filter ancestor="nlhomme/minecraft_server-fordummies" | xargs -r docker stop
 	docker rmi nlhomme/minecraft_server-fordummies
-	docker rmi nlhomme/minecraft_server-fordummies
+
 #If the user is not sure, aborting
 elif [[ "$sure" = "n" ]]
 then
