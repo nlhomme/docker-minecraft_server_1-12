@@ -1,7 +1,7 @@
 ##
 # NAME             : nlhomme/minecraft_server-fordummies
-# TO_BUILD         : docker build --rm -t nlhomme/minecraft_server-fordummies:lastest .
-# TO_RUN           : docker run -t -p 25565:25565 nlhomme/minecraft_server-fordummies:lastest
+# TO_BUILD         : docker build --rm -t nlhomme/minecraft_server-fordummies:latest .
+# TO_RUN           : docker run -t -p 25565:25565 nlhomme/minecraft_server-fordummies:latest
 ##
 
 FROM openjdk:8-jre
