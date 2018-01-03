@@ -8,9 +8,11 @@ fi
 
 
 ###START
+echo ""
+echo "Hello, welcome to the Minecraft Server for dummies installation wizard!"
 echo "Which way do you want to install Minecraft Server:"
 echo "1) Inside a Docker container?"
-echo "2) Directly on your filesystem?"
+echo "2) Directly on your machine?"
 echo ""
 echo "Type 1 or 2 to answer"
 
@@ -32,11 +34,11 @@ then
 
 elif [[ "$way" = "2" ]]
 then
-	echo "You have selected the filesystem way. Are you sure? (y/N)"
+	echo "You have selected the machine way. Are you sure? (y/N)"
 	read -r sure
 	if [[ "$sure" = "y" ]]
 	then
-		./install_filesystem-way.sh
+		./install_machine-way.sh
 	else	
 		echo "Aborting"
 		exit 0

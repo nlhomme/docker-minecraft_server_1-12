@@ -14,8 +14,7 @@ cp files/minecraft-cronjob /etc/cron.d/
 
 #Create minecraft user
 #Then give it permissions to run linecraft
-groupadd -r minecraft
-useradd -M -r -g minecraft -s "/bin/false" minecraft
+useradd -M -r -s "/bin/false" minecraft
 chown -R minecraft.minecraft /opt/minecraft
 
 #Give execution rights on the cron job
@@ -34,6 +33,7 @@ echo "Do you want to start the minecraft server right now? (y/N)"
 	read -r enable
 	if [[ "$enable" = "y" ]]
 	then
+		systemctl daemon-reload
 		systemctl start minecraft.service
 		#Wait 2 seconds, then check the minecraft server is running
 		sleep 2
