@@ -12,9 +12,11 @@ cp files/server.properties /opt/minecraft/
 cp files/minecraft.service /etc/systemd/system/
 cp files/minecraft-cronjob /etc/cron.d/
 
-#CRER UTILISATEUR MINECRAFT###
+#Create minecraft user
+#Then give it permissions to run linecraft
 groupadd -r minecraft
-useradd -M -r -g minecraft -s "/bin/bash" minecraft
+useradd -M -r -g minecraft -s "/bin/false" minecraft
+chown -R minecraft.minecraft /opt/minecraft
 
 #Give execution rights on the cron job
 chmod 0644 /etc/cron.d/minecraft-cronjob
@@ -33,9 +35,20 @@ echo "Do you want to start the minecraft server right now? (y/N)"
 	if [[ "$enable" = "y" ]]
 	then
 		systemctl start minecraft.service
+		#Wait 2 seconds, then check the minecraft server is running
+		sleep 2
+		if [[ $(systemctl is-active minecraft) = "active" ]]
+		then
+			echo "Minecraft is running. Have fun!"
+		else
+			echo "Startup has failed. Run 'journalctl -u minecraft' to see what happened"
+			exit 1
+		fi
+
 	else
-	echo "You can do this later by running this command:"
+	echo "OK. You can do this later by running this command:"
 	echo "systemctl start minecraft.service"
 	fi
 
+echo "My work is over, bye bye!"
 exit 0
