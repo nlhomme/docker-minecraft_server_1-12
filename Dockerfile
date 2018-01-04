@@ -1,7 +1,7 @@
 ##
-# NAME             : nlhomme/minecraft_server-fordummies
-# TO_BUILD         : docker build --rm -t nlhomme/minecraft_server-fordummies:latest .
-# TO_RUN           : docker run -t -p 25565:25565 nlhomme/minecraft_server-fordummies:latest
+# NAME             : minecraft
+# TO_BUILD         : docker build --build-arg version=[VERSION DU SERVEUR] -t serveurminecraft:latest .
+# TO_RUN           : docker run -d --name minecraft -p 25565:25565 serveurminecraft:latest
 ##
 ARG version
 FROM openjdk:8-jre
