@@ -13,7 +13,13 @@ else
 	echo "Docker service not found. You should install docker"
 	exit 1
 fi
-
+#Test de la présence de docker-compose
+if [ -x /usr/local/bin/docker-compose ]
+then
+    echo "docker-compose est installé"
+else 
+    echo "docker-compose est nécessaire à la création du conteneur, merci de l'installer."
+fi
 #Now let's build the container
 docker-compose up -d 
 if [[ $? = 0 ]] 
