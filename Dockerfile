@@ -20,9 +20,11 @@ RUN wget https://s3.amazonaws.com/Minecraft.Download/versions/$version/minecraft
 ADD files/eula.txt .
 ADD files/server.properties .
 ADD files/minecraft-cronjob /etc/cron.d/
-ADD files/your-save-folder-inside-me .
+ADD files/your-save-folder-inside-me ./save/
+ADD files/save.sh .
 
 #Ajout de sauvegarde
+RUN ./save.sh
 
 #Give execution rights on the cron job
 RUN chmod 0644 /etc/cron.d/minecraft-cronjob
