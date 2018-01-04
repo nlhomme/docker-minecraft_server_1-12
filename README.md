@@ -2,7 +2,7 @@
 
 (Very) Easily install a minecraft server directly on your machine or inside a Docker container
 
-# To-Do:
+# How to make it run:
 - Clone the repo (No, really?)
 - Run setup-wizard.sh as root
 - Follow the instructions
