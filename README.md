@@ -13,6 +13,4 @@
 - Play!
 
 # To-Do:
-- Take in charge your already existing minecraft save.
-- Install the minecraft version of your choice (currently installs 1.12)
-- Fix this problem: when the container is stopped, everythin is lost. I don't now (for the moment) how to stop it properly...
+- Take in charge your already existing minecraft save. (in progress)
