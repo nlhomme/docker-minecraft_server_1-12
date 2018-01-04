@@ -2,17 +2,17 @@ version: '3.4'
 services:
   serveurminecraft:
     build:
-	  context: .
-	  dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile
       args:
         version: 1.12
-	container_name: minecraft
-	image: serveurminecraft
-	restart: unless-stopped
-	ports:
-	  - "25565:25565"
-	volumes:
-	  - saveminecraft:/
+    container_name: minecraft
+    image: serveurminecraft
+    restart: unless-stopped
+    ports:
+      - "25565:25565"
+    volumes:
+      - saveminecraft:/
 volumes:
   saveminecraft:
     driver: local
