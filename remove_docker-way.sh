@@ -16,15 +16,16 @@ read -r sure
 
 if [[ "$sure" = "y" ]]
 then
-	##If the container is already running, stop it automatically
-	docker-compose down
-	docker rmi serveurminecraft
+        ##If the container is already running, stop it automatically
+        docker-compose down
+        docker volume rm minecraft_saveminecraft
+        docker rmi serveurminecraft
 
 #If the user is not sure, aborting
 elif [[ "$sure" = "n" ]]
 then
-	echo "You are wise. Aborting..."
-	exit 0
+        echo "You are wise. Aborting..."
+        exit 0
 fi
 
 #Work is done
