@@ -22,7 +22,7 @@ else
 	exit 1
 fi
 read -p "Please enter the desired minecraft version." version
-sed "/8/c         version: $version" docker-compose.yml
+sed -i "8c \ \ \ \ \ \ \ \ version: $version" docker-compose.yml
 #Now let's build the container
 docker-compose up -d 
 if [[ $? = 0 ]] 
