@@ -3,21 +3,21 @@
 nbsvg=$(find /var/lib/docker/volumes/minecraft_saveminecraft/_data/save/* -maxdepth 0 -type d 2>/dev/null | wc -l)
 if [[ $nbsvg -eq 0 ]]
 then
-	read -pr "Thanks to set a name for your new Realm." realmname
+        read -pr "Thanks to set a name for your new Realm." realmname
 elif [[ $nbsvg -eq 1 ]]
 then
-	realmname="$(find /var/lib/docker/volumes/minecraft_saveminecraft/_data/save/* -maxdepth 0 -type d)"
-	echo "Save found in the directory : $realmname"
+        realmname="$(find /var/lib/docker/volumes/minecraft_saveminecraft/_data/save/* -maxdepth 0 -type d)"
+        echo "Save found in the directory : $realmname"
 else [[ $nbsvg -gt 1 ]]
-	realmname="$(find /var/lib/docker/volumes/minecraft_saveminecraft/_data/save/* -maxdepth 0 -type d)"
-	clear
-	echo "Saves found : $realmname"
-	read -pr "Thanks to choose the good save : " realmname
+        realmname="$(find /var/lib/docker/volumes/minecraft_saveminecraft/_data/save/* -maxdepth 0 -type d)"
+        clear
+        echo "Saves found : $realmname"
+        read -pr "Thanks to choose the good save : " realmname
 fi
 #Recuperation du nom de la sauvegarde
 nbtour=$(echo "$realmname" | grep -o / | wc -l)
 i=0
-realmname=$(echo "$realmname" | 
+realmname=$(echo "$realmname" |
 while [[ $i -ne $nbtour ]]
 do sed "s/^.*\///"
 i=$(($i+1))
