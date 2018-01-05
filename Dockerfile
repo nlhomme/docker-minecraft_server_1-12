@@ -24,7 +24,7 @@ ADD files/your-save-folder-inside-me ./save/
 ADD files/save.sh .
 
 #Ajout de sauvegarde
-RUN ./save.sh
+#RUN ./save.sh
 
 #Give execution rights on the cron job
 RUN chmod 0644 /etc/cron.d/minecraft-cronjob
