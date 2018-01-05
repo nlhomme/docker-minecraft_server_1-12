@@ -12,7 +12,7 @@ services:
     ports:
       - "25565:25565"
     volumes:
-      - saveminecraft:/
+      - saveminecraft:/opt/minecraft/
 volumes:
   saveminecraft:
     driver: local
