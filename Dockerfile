@@ -16,15 +16,11 @@ WORKDIR /opt/minecraft
 #Donwnload Minecraft Server
 RUN wget https://s3.amazonaws.com/Minecraft.Download/versions/$version/minecraft_server.$version.jar
 
-#Copy files
+#Copy files / Copy your save in "files/your-save-folder-inside-me" if u want to use it!!!
 ADD files/eula.txt .
 ADD files/server.properties .
 ADD files/minecraft-cronjob /etc/cron.d/
 ADD files/your-save-folder-inside-me ./save/
-ADD files/save.sh .
-
-#Ajout de sauvegarde
-#RUN ./save.sh
 
 #Give execution rights on the cron job
 RUN chmod 0644 /etc/cron.d/minecraft-cronjob
@@ -33,3 +29,6 @@ RUN chmod 0644 /etc/cron.d/minecraft-cronjob
 VOLUME /opt/minecraft/
 ENTRYPOINT ["java", "-Xms1536M", "-Xmx1536M", "-jar /opt/minecraft/minecraft_server.$version.jar", "nogui"]
 EXPOSE 25565
+
+#Add your save to the server
+#Use the script : save.sh
