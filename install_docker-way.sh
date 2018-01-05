@@ -1,4 +1,5 @@
 #!/bin/bash
+#TO DO : Ajout le contrôle systemctl enable de docker
 
 #Starting the docker service if it is inactive
 if [[ $(systemctl is-active docker) = "active" ]]
