@@ -1,3 +1,4 @@
+#!/bin/bash
 #Set Realmname to enable save compatibility
 nbsvg=$(find /var/lib/docker/volumes/saveminecraft/_data/save/ -type d | wc -l)
 if [[ $nbsvg -eq 0 ]]
