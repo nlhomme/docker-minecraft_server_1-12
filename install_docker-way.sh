@@ -26,7 +26,10 @@ sed "/8/c         version: $version" docker-compose.yml
 #Now let's build the container
 docker-compose up -d 
 if [[ $? = 0 ]] 
-then echo "Le serveur est lancé."
+then
+	echo "Server is running."
+	echo "Save script :"
+	./save.sh
 else echo "La mise en service du conteneur a rencontré un problème."
 fi
 
