@@ -18,8 +18,11 @@ if [ -x /usr/local/bin/docker-compose ]
 then
 	echo "docker-compose est installé"
 else 
-	echo "docker-compose est nécessaire à la création du conteneur, merci de l'installer."
+	echo "docker-compose need to be on your system to go through, thanks to install it."
+	exit 1
 fi
+read -p "Please enter the desired minecraft version." version
+sed "/8/c         version: $version" docker-compose.yml
 #Now let's build the container
 docker-compose up -d 
 if [[ $? = 0 ]] 
