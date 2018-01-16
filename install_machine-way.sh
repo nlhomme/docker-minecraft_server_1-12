@@ -1,14 +1,25 @@
 #!/bin/bash
 
+echo ""
+echo "Type the minecraft version you want to install"
+echo "A list is available at https://minecraft.gamepedia.com/Version_history"
+read -r minecraftVersion
+
 #Creation of the folder where the server will run
 echo "[0%] Copying the minecraft folder"
 mkdir /opt/minecraft
 echo "Done!"
 
-echo "[20%] Downloading minecraft"
 #Donwnload Minecraft Server
-wget https://s3.amazonaws.com/Minecraft.Download/versions/1.12/minecraft_server.1.12.jar -P /opt/minecraft/
-echo "Done!"
+echo "[20%] Downloading minecraft " $minecraftVersion
+if ! wget https://s3.amazonaws.com/Minecraft.Download/versions/$minecraftVersion/minecraft_server.$minecraftVersion.jar -P /opt/minecraft/
+then
+	echo "Download failed. Check if the version number you typed is correct"
+	echo "A list is available at https://minecraft.gamepedia.com/Version_history"
+	exit 1
+else
+	echo "Done!"
+fi
 
 #Copy files
 echo "[40%] Copying files"
@@ -27,7 +38,8 @@ then
 	minecraftSave=$(basename files/your-save-folder-inside-me/*)
 	echo "[60%] Save "minecraftSave" found. I'm copying it..."
 	cp -r files/your-save-folder-inside-me/$minecraftSave /opt/minecraft
-	echo "level-name="$minecraftSave >> files/server.properties	
+	echo "level-name="$minecraftSave >> /opt/minecraft/server.properties
+	echo "motd=Serveur Minecraft "$minecraftVersion >> /opt/minecraft/server.properties
 	echo "Done!"	
 
 elif [ $subDirCount -eq 0 ]
