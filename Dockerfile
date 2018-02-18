@@ -1,12 +1,11 @@
 ##
 # NAME             : minecraft
 # TO_BUILD         : docker build --build-arg version=[VERSION DU SERVEUR] -t serveurminecraft:latest .
-# TO_RUN           : docker run -d --name minecraft -p 25565:25565 serveurminecraft:latest
+# TO_RUN           : docker run -d --name minecraft -p 25565:25565 -v saveminecraft:/opt/minecraft/ serveurminecraft:latest
 ##
 
 FROM openjdk:8-jre
 ARG version
-RUN echo $version
 
 #Install rsync and cron
 RUN apt-get update && apt-get -y install rsync cron

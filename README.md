@@ -13,4 +13,4 @@
 - Play!
 
 # To-Do:
-- Take in charge your already existing minecraft save. (in progress)
+- Take in charge your already existing minecraft save. (in progress - Docker OK)
