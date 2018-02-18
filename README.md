@@ -9,5 +9,5 @@
 - Clone the repo (No, really?)
 - Store your save folder in "files/your-save-folder-inside-me/"
 - Run setup-wizard.sh as root
-- Follow the instructions
+- - Follow the instructions 
 - Play!
