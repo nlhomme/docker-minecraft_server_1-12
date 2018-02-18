@@ -20,6 +20,7 @@ RUN wget https://s3.amazonaws.com/Minecraft.Download/versions/$version/minecraft
 #Copy files / Copy your save in "files/your-save-folder-inside-me" if u want to use it!!!
 ADD files/eula.txt .
 ADD files/server.properties .
+ADD files/ops.json .
 ADD files/your-save-folder-inside-me ./save/
 ADD files/minecraft-cronjob /etc/cron.d/
 
