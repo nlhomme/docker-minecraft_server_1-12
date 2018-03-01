@@ -47,7 +47,6 @@ then
 	echo "[60%] No save folder... You will have a new world"
 	echo "level-name=" >> files/server.properties
 	echo "motd=Serveur Minecraft >> /opt/minecraft/server.properties
-
 	echo "Done!"
 else
 	echo "A problem occured: two or more folders insides files/save-folder-inside-me"
