@@ -4,9 +4,6 @@ if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit 1
 fi
-
-
-
 ###START
 echo ""
 echo "Hello, welcome to the Minecraft Server for dummies installation wizard!"
@@ -17,7 +14,7 @@ echo ""
 echo "Type 1 or 2 to answer"
 
 read -r way
-
+#Docker way
 if [[ "$way" = "1" ]]
 then
 	echo "You have selected the Docker way. Are you sure? (y/N)"
@@ -25,13 +22,11 @@ then
 	if [[ "$sure" = "y" ]]
 	then
 		./install_docker-way.sh
-	
-
 	else	
 		echo "Aborting"
 		exit 0
 	fi
-
+#Machine way
 elif [[ "$way" = "2" ]]
 then
 	echo "You have selected the machine way. Are you sure? (y/N)"
@@ -43,7 +38,7 @@ then
 		echo "Aborting"
 		exit 0
 	fi
-
+#Bad Answer
 else
 	printf "invalid answer"
 	exit 1
