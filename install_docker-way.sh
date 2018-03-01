@@ -2,14 +2,14 @@
 #TO DO : Ajout le contrôle systemctl enable de docker
 if [[ $(systemctl is-enabled docker | echo $? ) -eq 0 ]]
 then
-	echo "Docker is enable."
+	echo "Docker is enabled."
 else
 	systemctl enable docker
 	if [[ $(echo $?) -eq 0 ]]
 	then
 		echo "Docker was inactive. That's ok now."
 	else
-		echo "Docker isn't installed. Thanks to fix it."
+		echo "Docker isn't installed. Please install it."
 		exit 1
 	fi
 fi
@@ -24,9 +24,9 @@ fi
 #Test de la présence de docker-compose
 if [ -x /usr/local/bin/docker-compose ]
 then
-	echo "docker-compose est installé"
+	echo "docker-compose is already installed"
 else 
-	echo "docker-compose need to be on your system to go through, thanks to install it."
+	echo "docker-compose needs to be on your system to go through, please install it."
 	exit 1
 fi
 read -p "Please enter the desired minecraft version." version
@@ -40,6 +40,7 @@ then
 	./save.sh
 else
 	echo "La mise en service du conteneur a rencontré un problème."
+	echo "A problem occured during the startup of the conatainer"
 	exit 1
 fi
 exit 0
