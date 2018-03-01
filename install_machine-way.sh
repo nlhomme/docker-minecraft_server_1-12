@@ -6,7 +6,7 @@ echo "A list is available at https://minecraft.gamepedia.com/Version_history"
 read -r minecraftVersion
 
 #Creation of the folder where the server will run
-echo "[0%] Copying the minecraft folder"
+echo "[0%] Creating the minecraft folder"
 mkdir /opt/minecraft
 echo "Done!"
 
