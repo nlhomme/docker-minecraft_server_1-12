@@ -1,8 +1,10 @@
 #!/bin/bash
 
 echo ""
+echo "In fact, Spigot will be installed"
+echo "Spigot allows plugins, this is why it is better"
 echo "Type the minecraft version you want to install"
-echo "A list is available at https://minecraft.gamepedia.com/Version_history"
+echo "A list is available at https://www.spigotmc.org/wiki/buildtools/#versions"
 read -r minecraftVersion
 
 #Creation of the folder where the server will run
@@ -10,19 +12,27 @@ echo "[0%] Creating the minecraft folder"
 mkdir /opt/minecraft
 echo "Done!"
 
+#Creation of the folder where Spigot will be built
+echo "[10%] Creating the build folder"
+mkdir /tmp/minecraft
+echo "Done!"
+
 #Donwnload Minecraft Server
-echo "[20%] Downloading minecraft " $minecraftVersion
-if ! wget https://s3.amazonaws.com/Minecraft.Download/versions/$minecraftVersion/minecraft_server.$minecraftVersion.jar -P /opt/minecraft/
+echo "[20%] Downloading minecraft " "$minecraftVersion"
+if ! wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar -P /tmp/minecraft/
 then
 	echo "Download failed. Check if the version number you typed is correct"
-	echo "A list is available at https://minecraft.gamepedia.com/Version_history"
+	echo "A list is available at https://www.spigotmc.org/wiki/buildtools/#versions"
 	exit 1
 else
+	git config --global --unset core.autocrlf
+	java -jar BuildTools.jar --rev "$minecraftVersion"
 	echo "Done!"
 fi
 
 #Copy files
 echo "[40%] Copying files"
+mv /tmp/spigot/spigot"$minecraftVersion".jar /opt/minecraft/spigot.jar
 cp files/eula.txt /opt/minecraft/eula.txt
 cp files/server.properties /opt/minecraft/
 cp files/minecraft.service /etc/systemd/system/
@@ -33,32 +43,31 @@ echo "Done"
 #then copy it tp the minecraft folder and enable it in the game
 subDirCount=$(find files/your-save-folder-inside-me/* -maxdepth 0 -type d | wc -l)
 
-if [ $subDirCount -eq 1 ]
+if [ "$subDirCount" -eq 1 ]
 then
 	minecraftSave=$(basename files/your-save-folder-inside-me/*)
-	echo "[60%] Save "minecraftSave" found. I'm copying it..."
-	cp -r files/your-save-folder-inside-me/$minecraftSave /opt/minecraft
-	echo "level-name="$minecraftSave >> /opt/minecraft/server.properties
-	echo "motd=Serveur Minecraft "$minecraftVersion >> /opt/minecraft/server.properties
-	echo "Done!"	
-
-elif [ $subDirCount -eq 0 ]
+	echo "[60%] Save $minecraftSave found. I'm copying it..."
+	cp -r files/your-save-folder-inside-me/"$minecraftSave" /opt/minecraft
+	echo "level-name=" "$minecraftSave" >> /opt/minecraft/server.properties
+	echo "motd=Serveur Minecraft " "$minecraftVersion" >> /opt/minecraft/server.properties
+	echo "Done!"
+elif [ "$subDirCount" -eq 0 ]
 then
 	echo "[60%] No save folder... You will have a new world"
 	echo "level-name=" >> files/server.properties
-	echo "motd=Serveur Minecraft >> /opt/minecraft/server.properties
+	echo "motd=Serveur Minecraft" >> /opt/minecraft/server.properties
 	echo "Done!"
 else
 	echo "A problem occured: two or more folders insides files/save-folder-inside-me"
 	echo "Ensure that there is zero or one folder a run the script again"
-exit 1
+	exit 1
 fi
 
 #Create minecraft user
 #Then give it permissions to run minecraft
 echo "[80%] Creating a minecraft user then give it permissions to run minecraft"
 useradd -M -r -s "/bin/false" minecraft
-chown -R minecraft.minecraft /opt/minecraft
+chown -R minecraft:/opt/minecraft
 
 #Give execution rights on the cron job
 chmod 0644 /etc/cron.d/minecraft-cronjob
