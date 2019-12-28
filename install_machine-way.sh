@@ -28,11 +28,11 @@ then
 	exit 1
 else
 	#Building spigot
-	"cd /tmp/minecraft"
+	cd /tmp/minecraft || exit
 	git config --global --unset core.autocrlf
 	java -jar BuildTools.jar --rev "$minecraftVersion"
 	echo "Done!"
-	"cd $workingDirectory"
+	cd $workingDirectory || exit
 fi
 
 #Copy files
