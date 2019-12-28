@@ -20,7 +20,7 @@ mkdir /tmp/minecraft
 echo "Done!"
 
 #Donwnload Minecraft Server
-echo "[20%] Downloading minecraft " "$minecraftVersion"
+echo "[20%] Downloading spigot " "$minecraftVersion"
 if ! wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar -P /tmp/minecraft/
 then
 	echo "Download failed. Check if the version number you typed is correct"
@@ -28,6 +28,7 @@ then
 	exit 1
 else
 	#Building spigot
+	echo "[30%] Building " "$minecraftVersion"
 	cd /tmp/minecraft || exit
 	git config --global --unset core.autocrlf
 	java -jar BuildTools.jar --rev "$minecraftVersion"
@@ -37,7 +38,7 @@ fi
 
 #Copy files
 echo "[40%] Copying files"
-mv /tmp/spigot/spigot"$minecraftVersion".jar /opt/minecraft/spigot.jar
+mv /tmp/minecraft/spigot"$minecraftVersion".jar /opt/minecraft/spigot.jar
 cp files/eula.txt /opt/minecraft/eula.txt
 cp files/server.properties /opt/minecraft/
 cp files/minecraft.service /etc/systemd/system/
