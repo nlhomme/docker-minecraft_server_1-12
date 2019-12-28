@@ -33,16 +33,17 @@ else
 	git config --global --unset core.autocrlf
 	java -jar BuildTools.jar --rev "$minecraftVersion"
 	echo "Done!"
-	cd $workingDirectory || exit
+	cd "$workingDirectory" || exit
 fi
 
 #Copy files
 echo "[40%] Copying files"
-mv /tmp/minecraft/spigot"$minecraftVersion".jar /opt/minecraft/spigot.jar
+mv /tmp/minecraft/spigot-"$minecraftVersion".jar /opt/minecraft/spigot.jar
 cp files/eula.txt /opt/minecraft/eula.txt
 cp files/server.properties /opt/minecraft/
 cp files/minecraft.service /etc/systemd/system/
 cp files/minecraft-cronjob /etc/cron.d/
+rm -rf /tmp/minecraft
 echo "Done"
 
 #If the "your-save-folder-inside-me" folder contains a save (folder)
@@ -73,7 +74,7 @@ fi
 #Then give it permissions to run minecraft
 echo "[80%] Creating a minecraft user then give it permissions to run minecraft"
 useradd -M -r -s "/bin/false" minecraft
-chown -R minecraft:/opt/minecraft
+chown -R minecraft: /opt/minecraft
 
 #Give execution rights on the cron job
 chmod 0644 /etc/cron.d/minecraft-cronjob
