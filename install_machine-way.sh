@@ -1,5 +1,7 @@
 #!/bin/bash
 
+workingDirectory=$(pwd)
+
 echo ""
 echo "In fact, Spigot will be installed"
 echo "Spigot allows plugins, this is why it is better"
@@ -25,9 +27,12 @@ then
 	echo "A list is available at https://www.spigotmc.org/wiki/buildtools/#versions"
 	exit 1
 else
+	#Building spigot
+	"cd /tmp/minecraft"
 	git config --global --unset core.autocrlf
 	java -jar BuildTools.jar --rev "$minecraftVersion"
 	echo "Done!"
+	"cd $workingDirectory"
 fi
 
 #Copy files
