@@ -2,7 +2,7 @@
 
 (Very) Easily install a minecraft server directly on your machine or inside a Docker container
 
-# I started to work on this on december 2019. The docker ways is not working due to the switch from Minecraft Vanilla to Spigot, and the download instructions are obsolete
+# I started to work on this in 2017. The docker ways is not working due to the switch from Minecraft Vanilla to Spigot, and the download instructions are obsolete
 Spigotis awesome. It lets you to run a minecraft server (normal), AND gives you the possibility to install plugins!
 Take a look [on their site] (https://www.spigotmc.org/)
 
